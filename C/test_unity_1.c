@@ -11,10 +11,7 @@ void tearDown(void) {
 }
 
 void Sum_of_integers_for_a_short_vector(void) {
-  int integers[1000];
-  for (int i = 1; i < 1001; ++i) {
-    integers[i-1] = i;
-  }
+  int integers[] = {1, 2, 3, 4, 5};
   TEST_ASSERT(sum_integers(integers, sizeof(integers)/sizeof(int)) == 1);
 }
 

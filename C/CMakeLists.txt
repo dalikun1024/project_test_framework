@@ -7,6 +7,10 @@ project(c_unittest_framework_demo LANGUAGES C)
 find_package(unity REQUIRED)
 message(STATUS ${unity_LIBS})
 
+set(CUnit_DIR "/usr/local/CUnit/share/cmake/")
+find_package(CUnit REQUIRED)
+include_directories(${CUNIT_INCLUDE_DIRS})
+
 # example library
 add_library(sum_integers ${CMAKE_CURRENT_SOURCE_DIR}/sum_integers.c)
 
@@ -25,6 +29,12 @@ add_executable(mqtt_test_1 ${CMAKE_CURRENT_SOURCE_DIR}/test_mqtt_1.c)
 target_link_libraries(mqtt_test_1 sum_integers)
 add_executable(mqtt_test_2 ${CMAKE_CURRENT_SOURCE_DIR}/test_mqtt_2.c)
 target_link_libraries(mqtt_test_2 sum_integers)
+
+# cunit testing binary
+add_executable(cunit_test_1 ${CMAKE_CURRENT_SOURCE_DIR}/test_cunit_1.c)
+target_link_libraries(cunit_test_1 sum_integers ${CUNIT_LIBRARIES})
+add_executable(cunit_test_2 ${CMAKE_CURRENT_SOURCE_DIR}/test_cunit_2.c)
+target_link_libraries(cunit_test_2 sum_integers ${CUNIT_LIBRARIES})
 
 # enable testing functionality
 enable_testing()
@@ -48,6 +58,15 @@ add_test(
   COMMAND $<TARGET_FILE:mqtt_test_2> --success
   )
 
+add_test(
+  NAME cunit_test_1
+  COMMAND $<TARGET_FILE:cunit_test_1> --success
+  )
+add_test(
+  NAME cunit_test_2
+  COMMAND $<TARGET_FILE:cunit_test_2> --success
+  )
+
 set_tests_properties(
 unity_test_1
 unity_test_2
@@ -60,3 +79,10 @@ mqtt_test_2
   PROPERTIES
   	LABELS "mqtt"
   )
+
+set_tests_properties(
+cunit_test_1
+cunit_test_2
+    PROPERTIES
+      LABELS "cunit"
+    )
