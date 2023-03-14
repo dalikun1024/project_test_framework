@@ -60,7 +60,9 @@ int main()
    /* Run all tests using the CUnit Basic interface */
    CU_basic_set_mode(CU_BRM_VERBOSE);
    CU_basic_run_tests();
+   int number_of_asserts = CU_get_number_of_asserts();
+   int number_of_success = CU_get_number_of_successes();
+   int number_of_failures = CU_get_number_of_failures();
    CU_cleanup_registry();
-   printf("error code: %d\n", CU_get_error());
-   return CU_get_error();
+   return number_of_failures;
 }

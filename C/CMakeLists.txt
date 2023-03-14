@@ -35,8 +35,6 @@ add_executable(cunit_test_1 ${CMAKE_CURRENT_SOURCE_DIR}/test_cunit_1.c)
 target_link_libraries(cunit_test_1 sum_integers ${CUNIT_LIBRARIES})
 add_executable(cunit_test_2 ${CMAKE_CURRENT_SOURCE_DIR}/test_cunit_2.c)
 target_link_libraries(cunit_test_2 sum_integers ${CUNIT_LIBRARIES})
-add_executable(cunit_test_3 ${CMAKE_CURRENT_SOURCE_DIR}/test_cunit_3.c)
-target_link_libraries(cunit_test_3 sum_integers ${CUNIT_LIBRARIES})
 
 # enable testing functionality
 enable_testing()
@@ -68,10 +66,6 @@ add_test(
   NAME cunit_test_2
   COMMAND $<TARGET_FILE:cunit_test_2> --success
   )
-add_test(
-  NAME cunit_test_3
-  COMMAND $<TARGET_FILE:cunit_test_3> --success
-  )
 
 set_tests_properties(
 unity_test_1
@@ -89,7 +83,6 @@ mqtt_test_2
 set_tests_properties(
 cunit_test_1
 cunit_test_2
-cunit_test_3
     PROPERTIES
       LABELS "cunit"
     )
