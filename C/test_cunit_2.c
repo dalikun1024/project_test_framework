@@ -29,7 +29,8 @@ void Sum_of_integers_for_a_longer_vector(void) {
   for (int i = 1; i < 1001; ++i) {
     integers[i-1] = i;
   }
-  CU_ASSERT(sum_integers(integers, sizeof(integers)/sizeof(int)) == 500500);
+//   CU_ASSERT(sum_integers(integers, sizeof(integers)/sizeof(int)) == 500500);
+   CU_ASSERT(sum_integers(integers, sizeof(integers)/sizeof(int)) == 12);
 }
 
 
